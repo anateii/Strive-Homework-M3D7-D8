@@ -57,9 +57,6 @@
 
     <script>
 
-
-        
-
         const endpoint = "https://striveschool-api.herokuapp.com/api/product/"
 
         const cardGroup = document.getElementById("card")
@@ -72,23 +69,16 @@
 })
             const data = await response.json()
 
-
-
-            const productModel ={
-                name: "Iphone 13",  //REQUIRED
-                description: "Description", //REQUIRED
-                brand: "Apple", //REQUIRED
-                imageUrl: "", //REQUIRED
-                price: "$800", //REQUIRED
-            }
+          
             
-          console.log(data.push(productModel))
-
+          
             cardGroup.innerHTML = data.map(event => `
             <img src=${event.imageUrl} class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">${event.name}</h5>
+                      
                       <p class="card-text">${event.description}</p>
+                      <p>${event.brand}</p>
                       <a href="#" class="btn btn-dark">${event.price}</a>
                     </div>
             `).join('')
