@@ -11,7 +11,7 @@
     <title>Display Amazon Products</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -34,7 +34,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md-6 mx-auto">
+            <div class="col-12 col-md-6 mx-auto mt-3">
                 <h1 class="text-center">Amazon Products</h1>
 
                 
@@ -57,20 +57,39 @@
 
     <script>
 
-        const endpoint = "https://striveschool-api.herokuapp.com/api/agenda"
+
+        
+
+        const endpoint = "https://striveschool-api.herokuapp.com/api/product/"
+
         const cardGroup = document.getElementById("card")
 
         // An async function returns a promise
         async function fetchEvents() {
-            const response = await fetch(endpoint)
+            const response = await fetch(endpoint, {headers: {
+"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjI4YWQ0ODRlYTdiMTAwMTVkMDY3YTQiLCJpYXQiOjE2NDY4MzI5NjgsImV4cCI6MTY0ODA0MjU2OH0.iw_De_SKj7A9zRwCBhCf-pwonYSVhx22Dbc1N3UVGNs"
+}
+})
             const data = await response.json()
+
+
+
+            const productModel ={
+                name: "Iphone 13",  //REQUIRED
+                description: "Description", //REQUIRED
+                brand: "Apple", //REQUIRED
+                imageUrl: "", //REQUIRED
+                price: "$800", //REQUIRED
+            }
+            
+          console.log(data.push(productModel))
 
             cardGroup.innerHTML = data.map(event => `
             <img src=${event.imageUrl} class="card-img-top" alt="...">
                     <div class="card-body">
                       <h5 class="card-title">${event.name}</h5>
                       <p class="card-text">${event.description}</p>
-                      <a href="#" class="btn btn-primary">${event.price}</a>
+                      <a href="#" class="btn btn-dark">${event.price}</a>
                     </div>
             `).join('')
         }
